@@ -1,0 +1,238 @@
+def get_config(mode: str = "xxs") -> dict:
+    if mode == "xxx_small":
+        mv2_exp_mult = 2
+        config = {
+            "layer1": {
+                "out_channels":4, # 4 8 4
+                "expand_ratio": mv2_exp_mult,
+                "num_blocks": 1,
+                "stride": 1,
+                "block_type": "mv2",
+            },
+            "layer2": {
+                "out_channels": 8, # 4 8 8    8 16 12
+                "expand_ratio": mv2_exp_mult,
+                "num_blocks": 3, # 3
+                "stride": 2,
+                "block_type": "mv2",
+            },
+            "layer3": {  # 28x28
+                "out_channels": 12, # 8 16 12    12 24 16
+                "transformer_channels": 24,
+                "ffn_dim": 64,
+                "transformer_blocks": 1,
+                "patch_h": 16,  # 8,16
+                "patch_w": 80,  # 40,80
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+                "se_in_channel":1280, # 320,1280
+            },
+            "layer4": {  # 14x14
+                "out_channels": 16,  # 12   28   16
+                "transformer_channels": 28,
+                "ffn_dim": 64,
+                "transformer_blocks": 2,
+                "patch_h": 8,  # 4, 8
+                "patch_w": 40,  # 20, 40
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+                "se_in_channel": 320,# 320,80
+            },
+            "layer5": {  # 7x7
+                "out_channels": 16, # 16   36   16
+                "transformer_channels": 16,
+                "ffn_dim": 128,
+                "transformer_blocks":2,
+                "patch_h": 4,
+                "patch_w": 20,
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+                "se_in_channel": 80,
+            },
+            "last_layer_exp_factor": 4,
+            "cls_dropout": 0.1
+        }
+    elif mode == "xx_small":
+        mv2_exp_mult = 2
+        config = {
+            "layer1": {
+                "out_channels":8, # 4 8 4   4 8 8
+                "expand_ratio": mv2_exp_mult,
+                "num_blocks": 1,
+                "stride": 1,
+                "block_type": "mv2",
+            },
+            "layer2": {
+                "out_channels": 12, # 4 8 8    8 16 12
+                "expand_ratio": mv2_exp_mult,
+                "num_blocks": 3, # 3
+                "stride": 2,
+                "block_type": "mv2",
+            },
+            "layer3": {  # 28x28
+                "out_channels": 16, # 8 16 16    12 24 16
+                "transformer_channels": 24,
+                "ffn_dim": 64,
+                "transformer_blocks": 1,
+                "patch_h": 16,  # 8,16
+                "patch_w": 80,  # 40,80
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+                "se_in_channel":1280, # 320,1280
+            },
+            "layer4": {  # 14x14
+                "out_channels": 24,  # 16   28   24
+                "transformer_channels": 28,
+                "ffn_dim": 64,
+                "transformer_blocks": 2,
+                "patch_h": 8,  # 4, 8
+                "patch_w": 40,  # 20, 40
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+                "se_in_channel": 320,# 320,80
+            },
+            "layer5": {  # 7x7
+                "out_channels": 32, # 24   36   32
+                "transformer_channels": 32,
+                "ffn_dim": 128,
+                "transformer_blocks":2,
+                "patch_h": 4,
+                "patch_w": 20,
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+                "se_in_channel": 80,
+            },
+            "last_layer_exp_factor": 4,
+            "cls_dropout": 0.1
+        }
+    elif mode == "x_small":
+        mv2_exp_mult = 4
+        config = {
+            "layer1": {
+                "out_channels": 32,
+                "expand_ratio": mv2_exp_mult,
+                "num_blocks": 1,
+                "stride": 1,
+                "block_type": "mv2",
+            },
+            "layer2": {
+                "out_channels": 48,
+                "expand_ratio": mv2_exp_mult,
+                "num_blocks": 3,
+                "stride": 2,
+                "block_type": "mv2",
+            },
+            "layer3": {  # 28x28
+                "out_channels": 64,
+                "transformer_channels": 96,
+                "ffn_dim": 192,
+                "transformer_blocks": 2,
+                "patch_h": 2,
+                "patch_w": 2,
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+            },
+            "layer4": {  # 14x14
+                "out_channels": 80,
+                "transformer_channels": 120,
+                "ffn_dim": 240,
+                "transformer_blocks": 4,
+                "patch_h": 2,
+                "patch_w": 2,
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+            },
+            "layer5": {  # 7x7
+                "out_channels": 96,
+                "transformer_channels": 144,
+                "ffn_dim": 288,
+                "transformer_blocks": 3,
+                "patch_h": 2,
+                "patch_w": 2,
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+            },
+            "last_layer_exp_factor": 4,
+            "cls_dropout": 0.1
+        }
+    elif mode == "small":
+        mv2_exp_mult = 4
+        config = {
+            "layer1": {
+                "out_channels": 32,
+                "expand_ratio": mv2_exp_mult,
+                "num_blocks": 1,
+                "stride": 1,
+                "block_type": "mv2",
+            },
+            "layer2": {
+                "out_channels": 64,
+                "expand_ratio": mv2_exp_mult,
+                "num_blocks": 3,
+                "stride": 2,
+                "block_type": "mv2",
+            },
+            "layer3": {  # 28x28
+                "out_channels": 96,
+                "transformer_channels": 144,
+                "ffn_dim": 288,
+                "transformer_blocks": 2,
+                "patch_h": 2,
+                "patch_w": 2,
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+            },
+            "layer4": {  # 14x14
+                "out_channels": 128,
+                "transformer_channels": 192,
+                "ffn_dim": 384,
+                "transformer_blocks": 4,
+                "patch_h": 2,
+                "patch_w": 2,
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+            },
+            "layer5": {  # 7x7
+                "out_channels": 160,
+                "transformer_channels": 240,
+                "ffn_dim": 480,
+                "transformer_blocks": 3,
+                "patch_h": 2,
+                "patch_w": 2,
+                "stride": 2,
+                "mv_expand_ratio": mv2_exp_mult,
+                "num_heads": 4,
+                "block_type": "mobilevit",
+            },
+            "last_layer_exp_factor": 4,
+            "cls_dropout": 0.1
+        }
+    else:
+        raise NotImplementedError
+
+    for k in ["layer1", "layer2", "layer3", "layer4", "layer5"]:
+        config[k].update({"dropout": 0.1, "ffn_dropout": 0.0, "attn_dropout": 0.0})
+
+    return config

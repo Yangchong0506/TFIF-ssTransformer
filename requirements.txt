@@ -1,0 +1,16 @@
+# TFIF-ssTransformer Dependencies
+# Core
+torch>=1.12.0
+numpy>=1.21.0
+pandas>=1.3.0
+scikit-learn>=1.0.0
+
+# Visualization (optional, for loss plotting)
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Image processing (optional, for thermal frame visualization)
+opencv-python>=4.5.0
+
+# Note: GPU training requires CUDA-compatible PyTorch.
+# Install from: https://pytorch.org/get-started/locally/
